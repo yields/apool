@@ -2,15 +2,19 @@
 var phantom = require('node-phantom');
 var app = require('express')();
 var codes = require('./codes');
-var pool = require('..')(500);
+var pool = require('..')(100);
 require('./test');
 
 phantom.create(function(err, p){
   if (err) throw err;
-  pool.generator(function(done){
+  pool.constructor(function(done){
     p.createPage(done);
   });
-  pool.populate(100);
+  pool.populate(50);
+});
+
+pool.destructor(function(page){
+  page.close();
 });
 
 app.get('/', function(req, res){

@@ -19,9 +19,18 @@ $ npm install apool
 
   Set `max` objects that the pool can hold.
 
-#### #generator(fn)
+#### #constructor(fn)
 
-  Set the `generator` that the pool will use when it needs more objects.
+  Set the `constructor` that the pool will use when it needs more objects.
+
+#### #destructor(fn)
+
+  Set the `destructor` that will be used to destroy objects.
+
+#### #min(n)
+
+  Set the `min` number of objects that will remain in the pool, defaulted to whatever
+  is passed to `populate()`.
 
 #### #length()
 
@@ -38,6 +47,13 @@ $ npm install apool
 #### #return(obj)
 
   Return an object to the pool.
+
+##### Events
+
+  - `add`, emitted when an object is added.
+  - `return`, emitted when an object is returned.
+  - `acquired`, emitted when an object is acquired.
+  - `populate`, emitted after `populate(n)`.
 
 ## Example
 

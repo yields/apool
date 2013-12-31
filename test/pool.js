@@ -14,9 +14,9 @@ describe('pool', function(){
     })
   })
 
-  describe('generator()', function(){
-    it('should set generator', function(){
-      pool().generator(pool)._generator.should.eql(pool);
+  describe('constructor()', function(){
+    it('should set constructor', function(){
+      pool().constructor(pool)._constructor.should.eql(pool);
     })
   })
 
@@ -88,6 +88,13 @@ describe('pool', function(){
       p.items.length.should.eql(10);
     })
 
+    it('should set min', function(){
+      var p = pool();
+      p.generator(function(){ return 1; });
+      p.populate(10);
+      p._min.should.eql(10);
+    });
+
     it('should not populate more than max', function(){
       var p = pool();
       p.generator(function(){ return 1; });
@@ -130,6 +137,25 @@ describe('pool', function(){
       p.return(1);
       p.return(1);
       p.items.should.eql([1]);
+    })
+
+    it('should destruct an item when there are more items then needed', function(done){
+      var p = pool();
+      p.constructor(function(){ return {}; });
+      p.destructor(function(obj){ obj.destroyed = true; });
+      p.max(2);
+      p.populate(1);
+      p.acquire(function(err, a){
+        if (err) return done(err);
+        p.acquire(function(err, b){
+          if (err) return done(err);
+          p.return(a);
+          p.return(b);
+          p.items.should.eql([{}]);
+          b.destroyed.should.be.true;
+          done();
+        })
+      });
     })
   })
 
