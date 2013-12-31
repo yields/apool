@@ -124,6 +124,24 @@ describe('pool', function(){
     })
   })
 
+  describe('destruct()', function(){
+    it('should call destructor', function(){
+      var p = pool();
+      var obj = {};
+      p.destructor(function(obj){ obj.called = true; });
+      p.destruct(obj);
+      obj.called.should.be.true;
+    })
+
+    it('should decrement added', function(){
+      var p = pool();
+      p.destructor(function(){});
+      p.added.should.eql(0);
+      p.destruct({});
+      p.added.should.eql(-1);
+    })
+  })
+
   describe('return()', function(){
     it('should return an item to items', function(){
       var p = pool();
