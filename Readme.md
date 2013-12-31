@@ -3,6 +3,12 @@
 
   generic object pool for node.
 
+## Installation
+
+```bash
+$ npm install generic-pool
+```
+
 ## API
 
 ### pool(max)
@@ -39,7 +45,7 @@
   benchmarking each with `wrk` yields:
 
 `no-pool.js`
-```javascript
+``` text
 Running 30s test @ http://localhost:3000/
   12 threads and 100 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
@@ -52,7 +58,7 @@ Transfer/sec:      2.07KB
 ```
 
 `pool.js`
-```javascript
+```text
 Running 30s test @ http://localhost:3000/
   12 threads and 100 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
