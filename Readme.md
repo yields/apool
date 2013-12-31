@@ -1,12 +1,12 @@
 
-# generic-pool
+# apool
 
   generic object pool for node.
 
 ## Installation
 
 ```bash
-$ npm install generic-pool
+$ npm install apool
 ```
 
 ## API
