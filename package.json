@@ -1,7 +1,7 @@
 {
-  "name": "generic-pool",
+  "name": "apool",
   "description": "generic pool",
-  "repo": "yields/generic-pool",
+  "repo": "yields/apool",
   "version": "0.0.1",
   "dependencies": {
     "debug": "~0.7.4",
