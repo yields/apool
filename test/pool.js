@@ -220,5 +220,23 @@ describe('pool', function(){
         p.return('baz');
       })
     })
+
+    it('should invoke the method with nulls if timeout happened', function(done){
+      p.populate(10, function(err){
+        if (err) return done(err);
+        var args;
+        p.items = [];
+
+        p.acquire(function(err, obj){
+          args = [].slice.call(arguments);
+        }, 5);
+
+        setTimeout(function(){
+          p.return('baz');
+          args.should.eql([]);
+          done();
+        }, 10);
+      });
+    })
   })
 })
